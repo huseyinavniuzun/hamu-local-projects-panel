@@ -1,0 +1,20 @@
+{
+	"name": "HAMU Local Panel",                       /* [TR] Uygulamanın tam adı / [EN] Full name of the app */
+	"short_name": "HAMU Local Panel",                        /* [TR] Uygulamanın kısa adı / [EN] Short name of the app */
+	"start_url": "/",                               /* [TR] Uygulama başlangıç URL'si / [EN] The start URL of the app */
+	"display": "standalone",                        /* [TR] Tek başına çalışacak mod / [EN] Standalone display mode */
+	"background_color": "#ffffff",                  /* [TR] Uygulama arka plan rengi / [EN] Background color */
+	"theme_color": "#007bff",                       /* [TR] Tarayıcı ve uygulama temasında kullanılacak renk / [EN] Theme color */
+	"icons": [                                      /* [TR] Uygulama ikonları / [EN] App icons */
+		{
+			"src": "/.hamu/images/favicon/android-chrome-192x192.png",
+			"sizes": "192x192",
+			"type": "image/png"
+		},
+		{
+			"src": "/.hamu/images/favicon/android-chrome-512x512.png",
+			"sizes": "512x512",
+			"type": "image/png"
+		}
+	]
+}

@@ -1,0 +1,30 @@
+# Sistem / IDE dosyaları
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# PHP / Composer
+/vendor/
+composer.lock
+
+# Ortam / Config
+.env
+*.env
+*.ini
+*.local
+.hamu/config.json
+.hamu/cache/
+.hamu/logs/
+
+# Node.js (varsa)
+node_modules/
+
+# Geçici / patch dosyaları
+*.orig
+
+# Hamu CMS özel
+1/
+2/
+3/

@@ -1,0 +1,17 @@
+{
+    "database_s": true,
+    "db_server_s": "localhost",
+    "db_user_s": "root",
+    "db_pass_s": "",
+    "modul_s": true,
+    "file_manager_s": true,
+    "file_manager_s_url": ".\/modules\/file_manager.php",
+    "phpmyadmin_s": true,
+    "phpmyadmin_s_url": "\/phpmyadmin",
+    "mail_server_s": true,
+    "mail_server_s_url": ":8025\/",
+    "ftp_server_s": true,
+    "ftp_server_s_url": "",
+    "first_setup": false,
+    "theme_s": false
+}

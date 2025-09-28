@@ -1,0 +1,644 @@
+/* Projenin temel CSS stilleri. [TR] Projenin temel CSS stilleri. / [EN] Main CSS styles for the project. */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+/* Tema Değişkenleri (Dark & Light)
+   [TR] Koyu ve açık tema için değişkenler tanımlanır.
+   [EN] Defines variables for dark and light themes.
+*/
+:root[data-bs-theme="dark"] {
+	--background-color: #121212 !important;
+	--text-color: #d0d0d0 !important;
+	--text-color-hover: #999 !important;
+	--container-bg: #1e1e1e !important;
+	--navbar-bg: #1e1e1e !important;
+	--navbar-border: #333 !important;
+	--footer-bg: #1e1e1e !important;
+	--footer-border: #333 !important;
+	--button-bg: #333 !important;
+	--button-hover-bg: #999 !important;
+	--input-border: #444 !important;
+	--folder-bg: #d0d0d0 !important;
+	--folder-hover-bg: #ededed !important;
+	--svg-word-color: #dedede !important;
+	--services-bg: #d0d0d0 !important;
+	--h4-color: #333 !important;
+	--termianl-input-bg: #333 !important;
+	--dropdown-bg: #333 !important;
+}
+
+:root[data-bs-theme="light"] {
+	--background-color: #f4f4f4 !important;
+	--text-color: #333 !important;
+	--text-color-hover: #999 !important;
+	--container-bg: #fff !important;
+	--navbar-bg: #dedede !important;
+	--navbar-border: #ccc !important;
+	--footer-bg: #eaeaea !important;
+	--footer-border: #ccc !important;
+	--button-bg: #007BFF !important;
+	--button-hover-bg: #0056b3 !important;
+	--input-border: #ccc !important;
+	--folder-bg: #ededed !important;
+	--folder-hover-bg: #d1d1d1 !important;
+	--svg-word-color: #000 !important;
+	--services-bg: #dedede !important;
+	--dropdown-bg: #ededed !important;
+}
+
+/* Tema’ya Özgü Element Düzenlemeleri
+   [TR] Dark ve Light temaya göre navbar, sidebar, klasör vb. öğelerin düzenlenmesi.
+   [EN] Element overrides for navbar, sidebar, folder, etc. according to the theme.
+*/
+[data-bs-theme="dark"] .navbar,
+[data-bs-theme="dark"] .sidebar {
+	background-color: var(--navbar-bg) !important;
+	border-bottom: 2px solid var(--navbar-border) !important;
+}
+[data-bs-theme="dark"] .folder {
+	background-color: var(--folder-bg) !important;
+}
+[data-bs-theme="dark"] .folder:hover {
+	background-color: var(--folder-hover-bg) !important;
+}
+[data-bs-theme="dark"] .logo svg {
+	color: var(--svg-word-color) !important;
+}
+[data-bs-theme="dark"] .server-info,
+[data-bs-theme="dark"] .database-info {
+	background-color: var(--services-bg) !important;
+}
+[data-bs-theme="light"] .navbar {
+	background-color: var(--navbar-bg) !important;
+	border-bottom: 2px solid var(--navbar-border) !important;
+}
+html[data-bs-theme="dark"] .ui-autocomplete {
+	background-color: #343a40 !important;
+	color: #fff !important;
+	border: 1px solid #495057 !important;
+}
+html[data-bs-theme="dark"] .ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
+	background-color: #495057 !important;
+	color: #ffffff !important;
+}
+
+/* Global Stiller / Global Styles */
+body {
+	margin: 0;
+	padding: 0;
+	background-color: var(--background-color) !important;
+	color: var(--text-color);
+	font-family: 'Poppins', sans-serif;
+}
+a {
+	color: var(--text-color);
+	font-family: 'Poppins', sans-serif;
+	text-decoration: none;
+}
+a:hover {
+	color: var(--text-color-hover);
+}
+
+/* Utility & Layout Helpers */
+body.middle,
+body.top {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: var(--background-color);
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+}
+body.middle {
+	height: 100vh;
+}
+body.top {
+	height: 50vh;
+}
+.free {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 10px;
+}
+.logo-buyuk {
+	position: relative !important;
+	top: 3vh;
+	cursor: help;
+}
+
+/* Containers */
+.container-small,
+.container-medium,
+.container-large,
+.cont {
+	background: var(--container-bg);
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.container-small {
+	width: 600px;
+}
+.container-medium,
+.cont {
+	width: 900px;
+}
+.container-large {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	
+}
+.container-module {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	padding: 5rem 0 3rem 0rem; /* Yukarı - Sol - Aşağı - Sağ */
+
+}
+.content-middle {
+	background-color: var(--dropdown-bg);
+	color: var(--svg-word-color);
+	border: none;
+	padding: 2rem;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+.content-large {
+	background-color: var(--dropdown-bg);
+	color: var(--svg-word-color);
+	border: none;
+	padding: 2rem;
+	width: 90vw;
+	border-radius: 5px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Buttons, Inputs, and Labels */
+button.test {
+	border-radius: 5px;
+	background: var(--button-bg);
+	color: white;
+	border: none;
+	cursor: pointer;
+	margin-top: 5px;
+	padding: 15px;
+}
+button.test:hover {
+	background: var(--button-hover-bg);
+}
+input.test,
+button.test,
+textarea.test {
+	width: 100%;
+	padding: 10px;
+	margin-top: 5px;
+	border: 1px solid var(--input-border);
+	border-radius: 5px;
+}
+label.test {
+	font-weight: bold;
+	margin-top: 10px;
+	display: block;
+}
+
+/* Navbar */
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 1000;
+	padding: 8px;
+}
+.navbar .logo {
+	flex: 0 0 auto;
+}
+
+.navbar .logo img {
+	height: 40px;
+	margin-left: 10px;
+}
+.navbar .title {
+	flex: 1 1 auto;
+	text-align: center;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding: 0 10px;
+}
+.navbar .right-section {
+	flex: 0 0 auto;
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	color: #666;
+}
+
+/* Dashboard & Sidebar */
+.dashboard {
+	display: flex;
+	padding: 15px;
+	gap: 15px;
+	max-width: 70%;
+	margin: auto;
+}
+.sidebar {
+	margin-top: 60px;
+	margin-bottom: 50px;
+	width: 300px;
+	background: #ededed;
+	padding: 10px;
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Main Content */
+.main-content {
+	margin-top: 60px;
+	margin-bottom: 50px;
+	max-width: 1200px;
+	flex: 1;
+	padding: 15px;
+	background: var(--container-bg);
+	border-radius: 8px;
+	box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Server & Database Info */
+.server-info,
+.database-info {
+	color: #000;
+	font-size: 14px;
+	margin-top: 20px;
+	padding: 15px;
+	background: var(--services-bg);
+	border-radius: 10px;
+	box-shadow: 0 4px 4px rgba(0,0,0,0.1);
+}
+.server-info h4,
+.database-info h4 {
+	color: var(--h4-color);
+}
+
+/* Service List */
+.service-list a {
+	display: block;
+	padding: 10px;
+	color: #5c5c5c;
+	text-decoration: none;
+	transition: 0.3s;
+	font-size: 14px;
+	border-bottom: 1px solid var(--input-border);
+}
+.service-list a:hover {
+	color: var(--text-color-hover);
+}
+
+/* Folder */
+.folder {
+	color: var(--h4-color);
+	cursor: pointer;
+	background: var(--folder-bg);
+	border-radius: 8px;
+	transition: all 0.3s ease-in-out;
+	box-shadow: 1px 2px 4px rgba(0,0,0,0.1);
+	text-align: center;
+	padding: 10px;
+}
+.folder:hover {
+	background: var(--folder-hover-bg);
+	transform: translateY(-3px);
+}
+.folder img,
+.folder i {
+  display: inline-block;     /* Ya da inline-flex */
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;    /* Dikey hizalamada daha tutarlı sonuç */
+  font-size: 3rem;
+}
+.folder-word {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
+	font-size: 13px;
+	font-weight: 500;
+}
+
+/* Database List */
+ul#databaseList li.db-name {
+	list-style: none;
+	cursor: pointer;
+	padding: 5px 0;
+}
+ul#databaseList li.db-name.active-db {
+	color: #08660c;
+	font-weight: bold;
+}
+
+/* Footer */
+.footer {
+	text-align: center;
+	padding: 10px;
+	background: var(--footer-bg);
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	z-index: 900;
+	border-top: 2px solid var(--footer-border);
+}
+.footer input#sqlQuery {
+	background-color: var(--termianl-input-bg);
+	color: #ddddd;
+	border-style: solid solid double solid;
+	border-width: 1px 1px 1px 0;
+	border-color: var(--input-border);
+	font-family: monospace;
+	box-shadow: none;
+	text-transform: none;
+	outline: none;
+}
+.terminalnodb::placeholder {
+	color: var(--text-color);
+}
+
+/* SQL Message */
+.sql-message {
+	color: #ededed !important;
+	margin: 5px 0;
+	padding: 5px 10px;
+	border-radius: 4px;
+}
+.sql-message.info {
+	color: #ededed !important;
+	background-color: #00471c;
+}
+.sql-message.success {
+	color: #ededed !important;
+	background-color: #217000;
+}
+.sql-message.warning {
+	color: #ededed !important;
+	background-color: #a86a0e;
+}
+.sql-message.error {
+	color: #ededed !important;
+	background-color: #b02727;
+}
+
+/* Tooltip */
+@media (max-width: 992px) {
+	.tooltip {
+		display: none !important;
+		opacity: 0 !important;
+		visibility: hidden !important;
+	}
+	.dashboard {
+		padding-top: 80px;
+		padding-bottom: 70px;
+		width: 100% !important;
+		max-width: 100% !important;
+		margin: 0 auto;
+	}
+	.main-content {
+		width: 100% !important;
+		max-width: 100% !important;
+		margin: 0 auto;
+	}
+}
+.tooltip-inner {
+	max-width: 800px !important;
+	white-space: normal !important;
+	text-align: left !important;
+	word-wrap: break-word !important;
+	overflow-y: auto;
+}
+
+/* File Manager */
+.file-manager {
+	padding: 1rem !important;
+	color: var(--text-color);
+	background: var(--container-bg);
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.1);
+	width: 90vw !important;
+	height: 80vh !important;
+}
+.file-manager iframe {
+	padding-top: 10px;
+	width: 100%;
+	height: 95%;
+	border: 1px solid transparent;
+	border-radius: 5px;
+}
+/* Homepage Link (Fixed Link) */
+.sabit-link {
+	position: fixed !important;
+	font-size: 18px !important;
+	top: 0 !important;
+	right: 0px !important;
+	padding: 15px !important;
+	background-color: var(--navbar-bg) !important;
+	color: var(--text-color) !important;
+	text-decoration: none !important;
+	z-index: 9999 !important;
+}
+.sabit-link:hover {
+	background-color: #999999 !important;
+	text-decoration: none !important;
+}
+.homepage-link-2 {
+	position: fixed !important;
+	font-size: 18px !important;
+	top: 0 !important;
+	right: -200px !important;
+	padding: 15px !important;
+	background-color: var(--navbar-bg) !important;
+	color: var(--text-color) !important;
+	text-decoration: none !important;
+	z-index: 9999 !important;
+}
+.homepage-link-2:hover {
+	background-color: #999999 !important;
+	text-decoration: none !important;
+}
+
+/* Container Middle & Others */
+button:hover {
+	background: var(--button-hover-bg);
+}
+
+/* Hidden & Modal Helpers */
+.hidden {
+	display: none;
+}
+.modal-lg {
+	max-width: 700px;
+}
+.modal-dialog-centered {
+	display: flex;
+	align-items: center;
+	max-width: 700px;
+	overflow-y: auto;
+}
+.modal-content {
+	font-size: 14px;
+	background-color: var(--container-bg);
+	color: var(--text-color);
+	border-radius: 8px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.modal-body {
+	padding: 10px;
+	font-size: 14px;
+	overflow-y: auto;
+	overflow-x: auto;
+	max-height: 700px;
+}
+.modal-body #settingsForm {
+	padding-left: 5%;
+	overflow-y: none;
+	overflow-x: none;
+	max-width: 80%;
+}
+.modal-body input {
+	max-width: 400px;
+}
+.modal-body select {
+	max-width: 600px;
+}
+.modal-header {
+	background-color: var(--header-bg);
+	border-bottom: 1px solid #dee2e6;
+	padding: 1rem;
+}
+.btn-close {
+	margin: -0.5rem -0.5rem -0.5rem auto;
+}
+.row.mb-3 {
+	margin-bottom: 1rem;
+}
+.form-label {
+	font-weight: 500;
+	margin-bottom: 0.5rem;
+}
+.form-check-label {
+	font-weight: 500;
+	margin-left: 0.25rem;
+}
+input[type="text"]:focus,
+select.form-select:focus {
+	outline: none;
+	box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Dark Mode & Language Switcher Ögeleri */
+
+/* Dil Dropdown Butonu */
+.btn#langDropdown {
+  border: none !important;
+  background-color: var(--dropdown-bg) !important;
+  color: var(--svg-word-color, #fff) !important;
+  height: 30px !important;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px !important;
+}
+
+/* Dropdown İçindeki Öğeler */
+.dropdown-item {
+	padding: 2px 5px !important;
+	font-size: 13px !important;
+}
+
+/* Dark Mode Select */
+.dark-mode-select {
+	background-color: var(--dropdown-bg) !important;
+	color: var(--svg-word-color, #fff) !important;
+	height: 30px;
+	display: inline-flex;
+	align-items: center;
+	padding-top: 4px !important;
+	padding: 0 6px;
+	border: none;
+	border-radius: 0 5px 5px 0;
+	margin: 0;
+}
+
+/* Dark Mode Icon */
+.dark-mode-icon {
+	background-color: var(--dropdown-bg) !important;
+	color: var(--svg-word-color, #fff) !important;
+	height: 30px;
+	width: 30px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 0px 0px 0px 8px;
+	border-radius: 5px 0 0 5px;
+	margin: 0;
+}
+
+/* Dil İkonu */
+.lang-icon {
+	background-color: var(--dropdown-bg) !important;
+	color: var(--svg-word-color, #fff) !important;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	padding: 0px 10px 0px 0px;
+	border-radius: 0 5px 5px 0;
+}
+
+/* Dark-Lang Wrapper */
+.dark-lang-wrapper {
+	display: inline-flex;
+	align-items: center;
+	gap: 0;
+	margin: 4px;
+}
+
+/* Mobile Dark Select (Offcanvas için) */
+#mobile-dark-select {
+	background-color: var(--dropdown-bg) !important;
+	color: var(--svg-word-color, #fff) !important;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	height: 30px;
+	width: 40px;
+	border-radius: 0 5px 5px 0;
+	padding: 0 6px;
+}
+@media (max-width: 992px) {
+  .btn-tt {
+padding-bottom: 3px;
+  }
+}
+.badge { 
+	font-size: 0.9rem; 
+}
+pre {
+      background: #eee;
+      padding: 1em;
+      border-radius: 5px;
+      max-height: 300px;
+      overflow-y: auto;
+}
+.card-header { 
+	font-weight: 600;
+	background-color: var(--text-color-hover);
+	color: var(--text-color);
+}
+.navbar-toggler-icon {
+	height: 1.3em !important;	
+}

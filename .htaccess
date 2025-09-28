@@ -1,0 +1,10 @@
+# JSON dosyalarının dışarıya erişimini engelle
+<FilesMatch "\.(json)$">
+    Require all denied
+</FilesMatch>
+
+# Eğer dosya yoksa index.php'ye yönlendir
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [L]
