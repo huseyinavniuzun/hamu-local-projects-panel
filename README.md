@@ -97,8 +97,7 @@ Projenin ana dizini ve alt klasörlerinin yapısı aşağıdaki gibidir:
          └── (Diğer modül dosyaları)
                # Örneğin: modul_example.php
                # Bu dosyalarda yer alan "$page_title" tanımı, index.php üzerinde modül listesinde gösterilir.
-			   # Translate(lang) desteği ile dil dosyasındaki gibi gösterir, yoksa yazıldığı gibi.
-
+               # Translate(lang) desteği ile dil dosyasındaki gibi gösterir, yoksa yazıldığı gibi.
 ```
 
 ---
