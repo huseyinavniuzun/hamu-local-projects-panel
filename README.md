@@ -15,7 +15,7 @@ Gereksinimler
 - Apache (.htaccess desteği) veya Nginx + PHP-FPM
 - MySQL/MariaDB (opsiyonel), gerekli PHP uzantıları: pdo, mbstring, json, curl
 
-```bash
+`bash`
 # 1) Repo
 git clone https://github.com/huseyinavniuzun/hamu-local-projects-panel.git
 cd hamu-local-projects-panel
