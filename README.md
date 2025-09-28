@@ -10,25 +10,27 @@
 
 ## Hızlı Başlangıç
 
-Gereksinimler: PHP 7.4+, MySQL/MariaDB veya SQLite, Apache/Nginx, `pdo`, `mbstring`, `json`, `curl`.
+Gereksinimler
+- PHP 8.1+ (öneri: 8.2+)
+- Apache (.htaccess desteği) veya Nginx + PHP-FPM
+- MySQL/MariaDB (opsiyonel), gerekli PHP uzantıları: pdo, mbstring, json, curl
 
-```bash```
-# 1) İndirme
+```bash
+# 1) Repo
 git clone https://github.com/huseyinavniuzun/hamu-local-projects-panel.git
 cd hamu-local-projects-panel
 
-# 2) Bağımlılıklar (Composer kullanıyorsan)
-composer install
+# 2) (Varsa) bağımlılıklar
+# composer install
 
-# 3) Konfigürasyon
-cp .hamu/config.example.json .hamu/config.json
-# config.json değerlerini kendi ortamına göre düzenle
+# 3) (Otomatik oluşmuyorsa) config örneği
+# cp .hamu/config.example.json .hamu/config.json
 
-# 4) Geliştirme sunucusu (örnek)
+# 4) Lokal deneme (PHP built-in)
 php -S localhost:8000 -t .
 
-# 5) Tarayıcıdan aç
-http://localhost:8000
+# 5) Tarayıcı
+# http://localhost:8000
 
 
 ## Özellikler
@@ -45,6 +47,7 @@ http://localhost:8000
 ![SQL Terminal](docs/images/sql-terminal.png)
 ![Ayarlar Menüsü](docs/images/ayarlar.png)
 
+- Detaylı kurulum: [docs/INSTALL.md](docs/INSTALL.md)
 
 ## 1. Giriş
 
@@ -232,6 +235,8 @@ Bu lisansa göre:
   location ~* \.(json|lock|env|ini|log)$ { deny all; }
   ```
   - Özellikle veritabanı bağlantıları ve PHP eval gibi fonksiyonların kullanımı dikkatle ele alınmalı, güvenlik açıklarına karşı önlemler alınmalıdır.
+  - Nginx yapılandırması: [docs/NGINX_Bilgilendirme.md](docs/NGINX_Bilgilendirme.md)
+  - JSON dosyalarının güvenliği: [docs/json_security.md](docs/json_security.md)
 
 - **Bakım:**  
   Düzenli dosya ve klasör yapısı, ileride yapılacak güncellemeler ve yeni özellik eklemeleri için büyük avantaj sağlar.
