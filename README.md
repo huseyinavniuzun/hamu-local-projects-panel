@@ -11,9 +11,9 @@
 ## Hızlı Başlangıç
 
 Gereksinimler
-- PHP 8.1+ (öneri: 8.2+)
+- PHP 7.3+ (öneri: 8.2+)
 - Apache (.htaccess desteği) veya Nginx + PHP-FPM
-- MySQL/MariaDB (opsiyonel), gerekli PHP uzantıları: pdo, mbstring, json, curl
+- PDO uyumlu veritabanları (MySQL/MariaDB ile test edilmiştir), gerekli PHP uzantıları: pdo, mbstring, json, curl
 
 ```bash
 # 1) Repo
@@ -205,7 +205,7 @@ Bu lisansa göre:
 
 ## 9. Sistem Gereksinimleri
 
-- PHP 7.4 veya üzeri
+- PHP 7.3 veya üzeri
 - MySQL veya SQLite
 - Apache veya Nginx
 - PHP Eklentileri: `pdo`, `json`, `mbstring`, `curl`
