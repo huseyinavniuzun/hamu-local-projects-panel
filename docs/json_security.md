@@ -1,6 +1,6 @@
-# JSON Dosyalarını (config.json gibi) Güvenli Hale Getirme Rehberi
+# JSON Dosyalarını (app_config.json gibi) Güvenli Hale Getirme Rehberi
 
-Bu doküman, sunucunuzdaki hassas JSON dosyalarını (örneğin `config.json`) güvenli hale getirme yöntemlerini açıklamaktadır. Doküman, hem Apache hem de Nginx sunucuları için gerekli ayarları detaylı olarak anlatmaktadır.
+Bu doküman, sunucunuzdaki hassas JSON dosyalarını (örneğin `app_config.json`) güvenli hale getirme yöntemlerini açıklamaktadır. Doküman, hem Apache hem de Nginx sunucuları için gerekli ayarları detaylı olarak anlatmaktadır.
 
 ---
 
@@ -14,7 +14,7 @@ Veritabanı bilgileri gibi hassas veriler içeren JSON yapılandırma dosyaları
 
 ### JSON Dosyalarına Tüm Erişimi Engelleme
 
-Hassas JSON dosyalarının bulunduğu klasörde (örneğin `.hamu/` dizininde) `.htaccess` dosyası oluşturup, aşağıdaki kuralları ekleyebilirsiniz:
+Hassas JSON dosyalarının bulunduğu klasörde (örneğin `.hamu/cache` dizininde) `.htaccess` dosyası oluşturup, aşağıdaki kuralları ekleyebilirsiniz:
 
 #### Apache 2.4 ve üzeri için:
 

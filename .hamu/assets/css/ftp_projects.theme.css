@@ -1,0 +1,347 @@
+/* ==========================================================================
+   HAMU DevPanel – FTP & Project Manager
+   Professional Bootstrap Overlay Theme (no PHP changes)
+   Scope: only FTP/Local/Project pages (content-ftp, content-large)
+   ========================================================================== */
+
+/* ---------- Root Tone (light, elegant, 1px lines) ---------- */
+:root {
+  --ftp-bg: #fbfcfe;
+  --ftp-card-bg: #ffffff;
+  --ftp-border: #e8edf3;
+  --ftp-border-strong: #d9e2ef;
+  --ftp-muted: #6b7785;
+  --ftp-text: #1d2736;
+  --ftp-accent: #0d6efd; /* Bootstrap primary */
+  --ftp-accent-2: #5b9cff; /* Lighter primary for hovers */
+  --ftp-shadow: 0 2px 12px rgba(16, 24, 40, 0.06);
+  --ftp-shadow-sm: 0 1px 6px rgba(16, 24, 40, 0.05);
+  --ftp-radius: 14px;
+  --ftp-radius-sm: 10px;
+  --ftp-icon-bg: #f4f7fb;
+}
+
+/* Page background + text */
+.container-module .content-ftp,
+.container-module .content-large {
+  color: var(--ftp-text);
+  background: var(--ftp-bg);
+}
+
+/* Section paddings tighter on desktop */
+.container-module .content-ftp .card,
+.container-module .content-large .card {
+  border: 1px solid var(--ftp-border);
+  border-radius: var(--ftp-radius);
+  background: var(--ftp-card-bg);
+  box-shadow: var(--ftp-shadow);
+}
+
+/* Card header refinement */
+.container-module .content-ftp .card-header,
+.container-module .content-large .card-header {
+  background: linear-gradient(180deg, #fff, #fafcfe);
+  border-bottom: 1px solid var(--ftp-border);
+  padding: 0.8rem 1rem;
+  font-weight: 600;
+}
+
+/* Alerts – thinner borders, refined */
+.container-module .content-ftp .alert,
+.container-module .content-large .alert {
+  border-radius: var(--ftp-radius-sm);
+  border: 1px solid var(--ftp-border);
+  box-shadow: var(--ftp-shadow-sm);
+}
+
+/* ---------- Headings & icon badges ---------- */
+.container-module .content-ftp h2,
+.container-module .content-ftp h3,
+.container-module .content-large h2,
+.container-module .content-large h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.container-module .content-ftp h2 i,
+.container-module .content-ftp h3 i,
+.container-module .content-large h2 i,
+.container-module .content-large h3 i {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--ftp-icon-bg);
+  border: 1px solid var(--ftp-border);
+}
+
+/* ---------- Toolbar (sticky) ---------- */
+.container-module .content-ftp .toolbar.sticky-top,
+.container-module .content-large .toolbar.sticky-top {
+  border: 1px solid var(--ftp-border);
+  border-radius: var(--ftp-radius-sm);
+  box-shadow: var(--ftp-shadow-sm);
+  backdrop-filter: saturate(1.15) blur(2px);
+}
+
+.simple-color {
+  background: #f7f9fc;
+  border: 1px solid var(--ftp-border);
+}
+
+/* ---------- Buttons ---------- */
+.container-module .content-ftp .btn,
+.container-module .content-large .btn {
+  border-radius: 10px;
+}
+
+.container-module .content-ftp .btn-secondary,
+.container-module .content-large .btn-secondary {
+  border: 1px solid var(--ftp-border-strong);
+  background: #f3f6fb;
+  color: #1f2a3a;
+}
+.container-module .content-ftp .btn-secondary:hover,
+.container-module .content-large .btn-secondary:hover {
+  background: #eef3fb;
+  border-color: var(--ftp-border-strong);
+}
+
+.container-module .content-ftp .btn-outline-secondary,
+.container-module .content-large .btn-outline-secondary {
+  border-color: var(--ftp-border-strong);
+  color: #2a3647;
+  background: #fff;
+}
+.container-module .content-ftp .btn-outline-secondary:hover,
+.container-module .content-large .btn-outline-secondary:hover {
+  background: #f8fbff;
+  border-color: var(--ftp-accent-2);
+  color: var(--ftp-accent);
+}
+
+/* Danger/Warning trim for compact icon buttons */
+.container-module .content-ftp .btn.btn-sm i,
+.container-module .content-large .btn.btn-sm i {
+  font-size: 0.9rem;
+}
+
+/* ---------- Lists (project list left) ---------- */
+.list-limit {
+  max-height: calc(100vh - 240px);
+  overflow: auto;
+  border: 1px solid var(--ftp-border);
+  border-radius: var(--ftp-radius);
+  box-shadow: var(--ftp-shadow-sm);
+  background: #fff;
+}
+.list-group-item {
+  padding: 0.6rem 0.8rem;
+  border-color: var(--ftp-border);
+}
+.list-group-item.active {
+  background: linear-gradient(180deg, #eaf2ff, #e3edff);
+  color: #0a1f44;
+  border-color: #cfe0ff;
+  font-weight: 700;
+}
+
+/* ---------- Tables (desktop) ---------- */
+.table {
+  margin-bottom: 0;
+  border-color: var(--ftp-border);
+}
+.table thead {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #f7f9fd;
+  border-bottom: 1px solid var(--ftp-border);
+}
+.table thead th {
+  font-weight: 600;
+  color: #334055;
+  white-space: nowrap;
+}
+.table-hover > tbody > tr:hover {
+  background: #f8fbff;
+}
+.table td,
+.table th {
+  vertical-align: middle;
+  border-color: var(--ftp-border);
+}
+
+/* Give table container a max height and smooth scroll */
+.table-responsive {
+  max-height: 62vh;
+  overflow: auto;
+  border: 1px solid var(--ftp-border);
+  border-radius: var(--ftp-radius);
+  box-shadow: var(--ftp-shadow-sm);
+}
+
+/* File column – icon + name alignment is ok; size column as badge-ish */
+.table td:nth-child(2) {
+  white-space: nowrap;
+}
+.table td:nth-child(2) .text-muted {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--ftp-border);
+  border-radius: 999px;
+  background: #fff;
+  font-weight: 600;
+}
+
+/* Operations column: make actions tidy */
+.table td:last-child {
+  white-space: nowrap;
+}
+.table td .collapse {
+  border-left: 2px solid #e9eef7;
+  padding-left: 0.6rem;
+}
+
+/* Folder/file icons refinement */
+.fa-folder {
+  color: #f4b942;
+}
+.fa-file {
+  color: #6a7a90;
+}
+
+/* Eye icon link in FTP table */
+a[target="_blank"] .fa-eye,
+.fa-eye {
+  opacity: 0.75;
+}
+a[target="_blank"] .fa-eye:hover,
+.fa-eye:hover {
+  opacity: 1;
+}
+
+/* ---------- “Path” pill ---------- */
+.content-ftp .fw-semibold span:last-child,
+.content-large .fw-semibold span:last-child {
+  display: inline-block;
+  padding: 0.25rem 0.55rem;
+  margin-left: 0.35rem;
+  border: 1px dashed var(--ftp-border);
+  border-radius: 8px;
+  background: #fff;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+  font-size: 0.9rem;
+}
+
+/* ---------- Forms (new folder/file, rename) ---------- */
+.input-group.input-group-sm .input-group-text {
+  background: #f6f9ff;
+  border-color: var(--ftp-border);
+}
+.form-control,
+.form-select {
+  border-color: var(--ftp-border);
+  border-radius: 10px;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--ftp-accent);
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.08);
+}
+
+/* Rename collapses feel like inline editors */
+.collapse .form-control.form-control-sm {
+  height: 34px;
+  border-radius: 8px;
+}
+
+/* Switch line alignment */
+.form-check.form-switch .form-check-input {
+  width: 2.6em;
+  height: 1.2em;
+}
+
+/* ---------- Modals ---------- */
+.modal-content {
+  border-radius: var(--ftp-radius);
+  border: 1px solid var(--ftp-border);
+  box-shadow: var(--ftp-shadow);
+}
+.modal-header {
+  border-bottom: 1px solid var(--ftp-border);
+  background: #fbfdff;
+}
+.modal-footer {
+  border-top: 1px solid var(--ftp-border);
+}
+
+/* Password reveal button */
+#btnReveal {
+  min-width: 84px;
+}
+
+/* ---------- Mobile cards (already used) ---------- */
+@media (max-width: 767.98px) {
+  .card {
+    border-radius: 12px;
+  }
+  .d-md-none .card .btn {
+    border-radius: 8px;
+  }
+  .table-responsive {
+    max-height: none;
+  }
+}
+
+/* ---------- Subtle hover lifts ---------- */
+.card:hover {
+  transform: translateY(-1px);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 18px rgba(16, 24, 40, 0.08);
+}
+
+/* ---------- Dark mode (optional – respects system) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ftp-bg: #0e1421;
+    --ftp-card-bg: #121a2b;
+    --ftp-border: #1e2940;
+    --ftp-border-strong: #2b3b59;
+    --ftp-muted: #a2b1c6;
+    --ftp-text: #e6edf7;
+    --ftp-icon-bg: #141f34;
+    --ftp-shadow: 0 2px 12px rgba(0, 0, 0, 0.35);
+    --ftp-shadow-sm: 0 1px 6px rgba(0, 0, 0, 0.28);
+  }
+  .table thead {
+    background: #18243a;
+  }
+  .simple-color {
+    background: #101a2d;
+  }
+  .list-group-item {
+    background: #0f1726;
+    color: var(--ftp-text);
+  }
+  .list-group-item.active {
+    background: #1a2a49;
+    border-color: #2b3e68;
+    color: #eef3ff;
+  }
+  a[target="_blank"] .fa-eye,
+  .fa-eye {
+    color: #cdd9f0;
+  }
+}
+
+button.is-open .fa-pen {
+  transform: rotate(12deg);
+  transition: transform 0.18s ease;
+}

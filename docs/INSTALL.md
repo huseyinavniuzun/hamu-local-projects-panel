@@ -10,22 +10,22 @@ Uygulama şu yapıda olmalıdır:
 
 ```
 /docroot/
-  index.php
+
   .htaccess
   .hamu/
     config.php
-    config.json
     functions.php
-    db_actions.php
+    actions.php
     css/
     js/
     images/
     modules/
     cache/
+    app_config.json
     logs/
 ```
 
-- `index.php` kök dizinde bulunmalıdır.
+- `` kök dizinde bulunmalıdır.
 - Tüm uygulama kodları `.hamu/` klasöründe bulunur.
 - `cache/` ve `logs/` klasörleri yazılabilir olmalıdır.
 
@@ -43,11 +43,11 @@ Kök dizinde bulunan `.htaccess` dosyası, gerekli yönlendirme ve güvenlik aya
     Require all denied
 </FilesMatch>
 
-# Dosya yoksa index.php'ye yönlendir
+# Dosya yoksa 'ye yönlendir
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [L]
+RewriteRule ^  [L]
 ```
 
 > Not: Apache yapılandırmanızda `AllowOverride All` aktif olmalıdır.
@@ -65,10 +65,10 @@ server {
     listen 80;
     server_name seninsite.com;
     root /var/www/hamu;
-    index index.php;
+    index ;
 
     location / {
-        try_files $uri $uri/ /index.php?$query_string;
+        try_files $uri $uri/ /?$query_string;
     }
 
     location ~ \.json$ {
@@ -94,11 +94,11 @@ server {
 
 ## 4. Config Dosyası
 
-- `config.json` uygulama tarafından otomatik oluşturuluyorsa, ayrıca işlem yapmanıza gerek yoktur.
+- `app_config.json` uygulama tarafından otomatik oluşturuluyorsa, ayrıca işlem yapmanıza gerek yoktur.
 - Eğer otomatik oluşmazsa, `config.example.json` dosyasını kopyalayarak kendi bilgilerinize göre düzenleyin:
 
 ```bash
-cp .hamu/config.example.json .hamu/config.json
+cp .hamu/cache/app_config.example.json .hamu/app_config.json
 ```
 
 ---
@@ -135,9 +135,9 @@ php -S localhost:8000 -t .
 
 ## 7. Güvenlik Notları
 
-- `config.json`, `db_actions.php`, `database.php`, `functions.php` gibi dosyalar doğrudan dış erişime kapalı olmalıdır.
+- `app_config.json`, `actions.php`, `database.php`, `functions.php` gibi dosyalar doğrudan dış erişime kapalı olmalıdır.
 - Apache veya Nginx yapılandırmasında `.json`, `.env`, `.ini`, `.log` gibi dosyaları engelleyin.
-- Üretim ortamında `.hamu` klasörünü tamamen kapatıp sadece `index.php` üzerinden yönlendirme yapmak daha güvenlidir.
+- Üretim ortamında `.hamu` klasörünü tamamen kapatıp sadece `` üzerinden yönlendirme yapmak daha güvenlidir.
 
 ---
 
