@@ -1,280 +1,73 @@
-> ![License](https://img.shields.io/badge/license-MIT-green) ![Status](https://img.shields.io/badge/status-stable-blue)
+# HAMU Local Projects Panel
 
-# HAMU LOCAL PROJECTS PANEL
+**Yerel web projeleri için tek bir çalışma paneli.**
 
-**HAMU LOCAL PROJECTS PANEL**, yerel geliştirme ortamında projeleri kolayca yönetebilmeniz için geliştirilmiş, modüler yapıya sahip ve genişletilebilir bir kontrol panelidir. Proje; çoklu dil desteği, dinamik veritabanı kontrolü, modül entegrasyonu, yerel dosya yöneticisi, mini SQL terminali gibi pek çok özelliği bünyesinde barındırır.
+PHP ile geliştirdiğim HAMU, proje klasörlerini ve geliştirme araçlarını ortak bir arayüzde topluyor. Günlük işlerde karşıma çıkan ihtiyaçları daha küçük, anlaşılır adımlarla çözmeye yönelik çalışmalarımın bir parçası.
 
----
+[Kurulum](#başlangıç) · [Dağıtım](DEPLOYMENT.md) · [Katkı](CONTRIBUTING.md) · [MIT Lisansı](LICENSE)
 
-## Hızlı Başlangıç
+![HAMU ana paneli](docs/images/dashboard.png)
 
-Gereksinimler
+## Neden geliştirdim?
 
-- PHP 7.3+ (öneri: 8.2+)
-- Apache (.htaccess desteği) veya Nginx + PHP-FPM
-- PDO uyumlu veritabanları (MySQL/MariaDB ile test edilmiştir)
-- PHP uzantıları: pdo, mbstring, json, curl
+Birden fazla yerel projeyle çalışırken klasörler, dosyalar ve veritabanı araçları arasında geçiş yapmak ayrı ayrı adımlara dönüşebiliyor. HAMU ile bu işlemler için ortak bir başlangıç noktası oluşturmaya çalışıyorum.
+
+İhtiyacı fark etmek, çözüm denemek, hataları düzeltmek ve kullandıkça geliştirmek… Bu depo hem ortaya çıkan aracı hem de çözüm arayışımı gösteriyor.
+
+## Neler var?
+
+- Proje kartları, arama, sıralama ve filtreler.
+- Tiny File Manager ile dosya yönetimi.
+- SQL terminali ve veritabanı yardımcıları.
+- FTP/proje işlemleri ve ek PHP modülleri.
+- Türkçe/İngilizce arayüz, tema ve özel CSS/JavaScript desteği.
+- Markdown ve günlük görüntüleyicisi.
+
+Dosya yöneticisi, SQL terminali, FTP/proje işlemleri ve geliştirme modülleri yalnızca yerel loopback erişiminde (`127.0.0.1` / `::1`) kullanılabilir. İnternet erişiminde bu araçlar kapalıdır.
+
+<details>
+<summary>Diğer ekran görüntüleri</summary>
+
+![SQL terminali](docs/images/sql-terminal.png)
+
+![Ayarlar](docs/images/ayarlar.png)
+
+</details>
+
+## Başlangıç
+
+PHP 8.2 veya üzeri, `openssl`, `mbstring`, `PDO` ve kullanılacak veritabanına uygun PDO sürücüsü gerekir. Kullanılan araçlara göre `curl`, `ftp` veya `gd` uzantıları da gerekebilir.
 
 ```bash
-# 1) Repo
 git clone https://github.com/huseyinavniuzun/hamu-local-projects-panel.git
 cd hamu-local-projects-panel
-
-# 2) (Varsa) bağımlılıklar
-# composer install
-
-# 3) (Otomatik oluşmuyorsa) config örneği
-# cp .hamu/cache/config.example.json .hamu/cache/app_config.json
-
-# 4) Lokal deneme (PHP built-in)
-php -S localhost:8000 -t .
-
-# 5) Tarayıcı
-# http://localhost:8000
+php -S 127.0.0.1:8000 -t .
 ```
 
-## Özellikler
+Tarayıcıda `http://127.0.0.1:8000` adresini açın. Bu geliştirme sunucusu yalnızca yerel kullanım içindir.
 
-- **Modüler Yapı:** Yeni PHP dosyaları ekleyerek sistem genişletilebilir.
-- **Çoklu Dil:** `lang.php` üzerinden dil desteği.
-- **SQL Terminal:** `actions.php` ile canlı SQL sorguları, autocomplete desteği.
-- **Tiny File Manager:** Dosya yönetimi için hazır modül.
-- **Özel CSS/JS:** `.hamu/css` ve `.hamu/js` dizinleri üzerinden özelleştirme.
-- **Cache & Logs:** Sistem kendi cache ve log mekanizmasına sahiptir.
+Sunucuya taşımadan önce `setup-admin.php` ile yönetici parolası tanımlayın. Araç, `HAMU_SETUP_PASSWORD` ortam değişkeninden en az 16 karakterlik parola alır. Gizli giriş, sunucu erişim kuralları ve şifreleme anahtarı için [dağıtım rehberini](DEPLOYMENT.md) izleyin.
 
-## Ekran Görüntüleri
+## Erişim ve güvenlik
 
-![Panel - Ana Ekran](docs/assets/images/dashboard.png)
-![SQL Terminal](docs/assets/images/sql-terminal.png)
-![Ayarlar Menüsü](docs/assets/images/ayarlar.png)
+İnternet erişiminde HTTPS ve yönetici kimlik doğrulaması zorunludur. Yazma isteklerinde CSRF kontrolü, giriş denemelerinde sınırlama ve oturum süresi kontrolü uygulanır. Yeni hassas değerler AES-256-GCM ile şifrelenir; TOTP ve kurtarma kodu yönetimi bulunur.
 
-- Detaylı kurulum: [docs/INSTALL.md](docs/INSTALL.md)
+`.hamu/` altına doğrudan HTTP erişimi kapalı olmalıdır; sayfalar, API ve varlıklar `index.php` üzerinden sunulur. Özel yapılandırma, anahtarlar, günlükler ve veritabanları Git'e eklenmemelidir. Apache/Nginx ve ters proxy ayarları için [DEPLOYMENT.md](DEPLOYMENT.md) dosyasını okuyun.
 
-## 1. Giriş
+PHP 8.3 sözdizimi, HTTP giriş ve ana panel, yetkili ayar güncellemesi, TOTP kaydı ve şifreli saklama ile CSRF ve dizin geçişi engelleri kontrol edildi. Canlı hosting, SMTP/FTP ve canlı veritabanı bağlantıları her kurulumda ayrıca doğrulanmalıdır.
 
-Bu dokümantasyon, sistemin genel yapısını, klasör/dosya organizasyonunu, modül entegrasyon sürecini ve temel kullanım yönergelerini kapsamaktadır. Geliştiriciler ve kullanıcılar için sistemi daha iyi anlamaya yardımcı olmayı amaçlar.
+## Geliştirme
 
----
+`index.php` giriş noktasıdır. Ortak erişim kontrolleri `.hamu/security.php`, yönlendirmeler `.hamu/pub/`, yapılandırma `.hamu/config.php`, kimlik doğrulama `.hamu/auth.php` dosyalarındadır. Ek araçlar `.hamu/modules/`, stil ve JavaScript dosyaları `.hamu/assets/` altında bulunur.
 
-## 2. Klasör Yapısı
+İyileştirme fikirleri için issue açabilir veya [katkı rehberini](CONTRIBUTING.md) izleyebilirsiniz. Güvenlik bildirimlerini [güvenlik politikasındaki](SECURITY.md) kanaldan iletin.
 
-Projenin ana dizini ve alt klasörlerinin yapısı aşağıdaki gibidir:
+## Geliştirici
 
-```
-/ (Proje Kök Dizin)
-│
-├──                          # Uygulamanın giriş noktası, ana kontrol paneli
-│
-└── .hamu/
-    │
-    ├── auth.php                      # Sayfa yetki kontrolü ve giriş ekranı.
-    ├── config.php                    # Ayarları yöneten PHP dosyası
-    ├── database.php                  # Veritabanı bağlantı işlemleri
-    ├── actions.php                # SQL terminal işlevselliği, sorgu yardımı, otomatik tamamlama
-    ├── filemanager.php              # Yerel dosya yöneticisi ve editörü.
-    ├── projects.php              # Proje FTP yöneticisi
-    ├── footer.php                    # Sayfa alt tag yapısı (result modal + settings modal)
-    ├── functions.php                 # Genel yardımcı fonksiyonlar
-    ├── header.php                    # Sayfa üst tag yapısı + CSS / Bootstrap vb
-    ├── lang.php                      # Çoklu dil desteği için dil dosyası
-    ├── readme.php                    # Markdown ve log okuma sayfası
-    ├── cache/
-    │   └── app_config.json           # Sistem ayarları cache dosyası
-    │   └── cache_autocomplete.json   # Database Autocomplete cache dosyası
-    │   └── projects_meta.json        # Proje klasör yapısı cache dosyası
-    ├── css/
-    │   └── hamu.main.min.css              # Özel stil dosyası
-    ├── images/
-    │   ├── favicon/                  # Favicon dosyaları
-    │   └── manifest.json             # Uygulama manifest dosyası
-    │   └── logo.php                  # Uygulama logosu çağırma dosyası (svg)
-    ├── include/
-    │   └── filemanager               # Dahil edilen: dosya yöneticisi (Tiny File Manager)
-    │   └── ftpclient                 # Dahil edilen: ftp client (nicolab/php-ftp-client)
-    ├── js/
-    │   ├── hamu.main.min.js                # Genel JavaScript işlevleri
-    │   ├── hamu.db.actions.min              # SQL terminali ve veritabanı işlemleri kontrol işlemleri
-    │   └── modules.js                        # Ekstra sayfa ve modül işlevleri
-    ├── logs/
-    │   └── db_terminal.log           # SQL terminal kayıt dosyası
-    │   └── project_actions.log            # FTP proje kayıt doyası
-    │   └── meta_actions.log       # Proje klasörleri işlemleri kayıt dosyası
-    │   └── projects_meta.log         # Proje meta bilgileri kayıt dosyası
-    │   └── app_sessions.log              # Oturum kayıt dosyası
-    ├── modules/
-    │   └── app_sessions.log              # Oturum kayıt dosyası
-    │     └── (modül dosyaları)
-    │           # Örneğin: modul_example.php
-    │           # Bu dosyalarda yer alan "$page_title" tanımı,  üzerinde modül listesinde gösterilir.
-    │           # Translate(lang) desteği ile dil dosyasındaki gibi gösterir, yoksa yazıldığı gibi.
-    ├── readme/
-    │   └── actions.md             # Database yönetimi okubeni dosyası
-    │   └── filemanager.md           # Dahil edilen: dosya yöneticisi (Tiny File Manager) okubeni dosyası
-    │   └── projects.md               # Proje FTP yöneticisi okubeni dosyası
-    │   └── security.md               # Güvenlik bilgilendirme okubeni dosyası
-    │   └── language.md               # Dil ayaları okubeni dosyası
-    │   └── readme.md                 # Genel proje okubeni dosyası.
+**Hüseyin Avni Uzun · HAMU**
 
-```
+Tekrarlanan işleri kolaylaştıran araçlar geliştiriyor; deneyerek öğrendiklerimi kod ve kullanım belgeleriyle paylaşıyorum.
 
----
+[GitHub](https://github.com/huseyinavniuzun) · [Web sitem](https://huseyinavniuzun.com) · [Excel için HAMU Tools](https://github.com/huseyinavniuzun/HAMU-Tools) · [Tarayıcı betiklerim](https://github.com/huseyinavniuzun/userscripts)
 
-## 3. Dosya ve Fonksiyon Açıklamaları
-
-### 3.1 Ana Dosyalar ve Çalıştırma Gereksinimleri
-
-- **:** Panelin giriş noktasıdır. Tüm modüller, navigasyon ve içerik yüklemelerini gerçekleştirir.
-- **app_config.json:** Sistem ayarları (veritabanı ayarları, modüllerin aktiflik durumları vb.) bu dosyada tutulur ve kullanıcı tarafından düzenlenebilir.
-- **config.php:** Ayarları global hale getirir, bir kez yükleyerek verimli çalışmayı sağlar.
-- **database.php:** Veritabanına bağlanmak için PDO kullanan bağlantı ayarlarını sağlar.
-- **functions.php:** Sistemin genel fonksiyonlarını içerir, örneğin;
-  - Proje klasörlerini listeleme.
-  - Modül dosyalarını tarama.
-  - Sistem sürüm bilgilerini alma.
-- **actions.php:** SQL terminali ve sorgu işlemlerini yönetir; kullanıcıların sorgularını çalıştırmasına ve sonuçları görmesine imkân verir.
-- **lang.php:** Çoklu dil desteği için gerekli metinleri ve kullanıcı tarafından dil değiştirme işlevlerini sağlar.
-- **filemanager.php:** Responsive dosya yöneticisi, dosya yükleme, silme, düzenleme işlemlerini destekler.
-- **hamu.main.min.css:** Görünüm ve temaların özelleştirilmesi için gerekli CSS tanımlarını içerir.
-
-### 3.2 JavaScript Dosyaları
-
-- **hamu.main.min.js:** Arayüz bileşenleri ve genel olay yönetimini sağlar.
-- **hamu.db.actions.min:** SQL terminali fonksiyonları; sorgu geçmişi, otomatik tamamlama, hata yönetimi.
-- **modules.js:** Ekstra modül ve sayfaların JavaScript kodlarını yüklemek için kullanılır.
-
----
-
-## 4. Modül Ekleme ve Entegrasyon
-
-Yeni modüller, `.hamu/modules/` dizinine eklenir ve aşağıdaki kriterlere uymalıdır:
-
-- Dosya adlarında nokta (.) kullanılmaz.
-- Her modül dosyası içinde `$page_title` tanımı yapılmalıdır:
-
-```php
-<?php
-$md_file       = "modul.md";                // Markdown dosyası (opsiyonel)
-$page_title    = "Modül Başlığı";           // Modülün gösterilecek başlığı
-$body_class    = "";                        // Body etiketi için CSS sınıfları
-$include_db    = 0;                         // Veritabanı bağlantısı (0=hayır, 1=evet)
-$menu_type     = 1;                         // Menü gösterimi (0=mobil, 1=tüm ekranlar)
-
-require_once __DIR__.'/header.php';
-?>
-
-<h1>Modül İçeriği</h1>
-
-<?php echo markdown($md_file); ?> <!-- Opsiyonel -->
-<?php translate('yazı'); ?> <!-- Dil çeviri opsiyonel -->
-
-<?php require_once __DIR__.'/footer.php'; ?>
-```
-
-Sistem otomatik olarak yeni modülleri algılar ve kullanıcı arayüzünde listeler.
-
----
-
-## 5. SQL Terminal Kullanım Yönergeleri
-
-SQL terminalinde sorgularınızı yazıp çalıştırabilirsiniz:
-
-- Terminal üzerinden sorguları çalıştırmak için giriş alanına yazıp çalıştır düğmesine veya Enter tuşuna basınız.
-- Çoklu sorguları noktalı virgül (;) ile ayırarak çalıştırabilirsiniz.
-- Geçmiş sorgularınız, shift + yukarı/aşağı yön tuşlarıyla erişilebilir.
-- Otomatik tamamlama özelliği aktif olup sorgularınızı yazarken öneriler sunulur.
-
----
-
-## 6. Kullanım ve Özelleştirme
-
-- Sistem ayarları `app_config.json` üzerinden yapılandırılır.
-- Dil ayarları, tema özelleştirme ve ekstra fonksiyonları özelleştirmek mümkündür.
-
----
-
-## 7. Katkı
-
-1. Repo’yu fork edin.
-2. Branch oluşturun: `feature/...` veya `fix/...`.
-3. Kodunuzu yazıp commit edin.
-4. PR açın, açıklamaları doldurun.
-
-Ayrıntılı kurallar için [CONTRIBUTING.md](CONTRIBUTING.md) dosyasına bakın.
-
----
-
-## 8. Lisans ve Kullanım
-
-Bu proje, açık kaynak kodlu olup **MIT Lisansı** ile dağıtılmaktadır.
-Responsive File Manager da MIT lisansı ile kullanılmaktadır.
-
-Bu proje içinde **Responsive File Manager** kullanılmaktadır ve aşağıdaki lisans koşullarına tabidir:
-
-- Responsive File Manager, **M. Edoardo Tripodi** tarafından geliştirilmiş olup **MIT Lisansı** ile dağıtılmaktadır.
-- Orijinal proje sayfası: [https://github.com/trippo/ResponsiveFilemanager](https://github.com/trippo/ResponsiveFilemanager)
-
-Bu lisansa göre:
-
-- Projeyi ticari veya kişisel olarak kullanabilirsiniz.
-- Ancak orijinal lisans bilgilerini ve yazarı belirtmek zorundasınız.
-- Proje içindeki `LICENSE` dosyasını ve ilgili dosyalardaki telif hakkı bilgilerini silmemeniz gerekmektedir.
-
----
-
-## 9. Sistem Gereksinimleri
-
-- PHP 7.3 veya üzeri
-- MySQL veya SQLite
-- Apache veya Nginx
-- PHP Eklentileri: `pdo`, `json`, `mbstring`, `curl`
-
----
-
-## 10. Geliştirici Notları
-
-- **Genişletilebilirlik:**
-  Sistem, modüler yapısı sayesinde ek modüller ile kolayca genişletilebilir. Geliştiricilerin kullanabileceği örnek modül dosyaları ve API dokümantasyonunun hazırlanması önerilir.
-
-- **Güvenlik:**
-
-  - Konfigürasyon ve sistem dosyaları dış erişime kapalı tutulmalıdır.
-  - `.hamu/`, `logs/` ve `app_config.json` **kesinlikle public erişime açık olmamalıdır**.
-    \*\* Apache için örnek `.htaccess`:
-
-  ```apache
-  RewriteEngine On
-  RewriteRule ^\.hamu/ - [F,L,NC]
-  <FilesMatch "\.(json|lock|env|ini|log)$">
-    Require all denied
-  </FilesMatch>
-  ```
-
-  \*\* Nginx eşdeğeri:
-
-  ```nginx
-  location ~* ^/\.hamu/ { deny all; }
-  location ~* \.(json|lock|env|ini|log)$ { deny all; }
-  ```
-
-  - Özellikle veritabanı bağlantıları ve PHP eval gibi fonksiyonların kullanımı dikkatle ele alınmalı, güvenlik açıklarına karşı önlemler alınmalıdır.
-  - Nginx yapılandırması: [docs/NGINX_Bilgilendirme.md](docs/NGINX_Yetkilendirme.md)
-  - JSON dosyalarının güvenliği: [docs/json_security.md](docs/json_security.md)
-
-- **Bakım:**
-  Düzenli dosya ve klasör yapısı, ileride yapılacak güncellemeler ve yeni özellik eklemeleri için büyük avantaj sağlar.
-
----
-
-## 11. Sonuç
-
-HAMU LOCAL PROJECTS PANEL, kapsamlı ve modüler bir yapı ile kullanıcı ve geliştiricilere yerel projelerini etkin biçimde yönetmeleri için güçlü araçlar sağlar.
-
-## Ek Notlar
-
-- Dokümantasyon ve örnek modül dosyaları, projenin geliştirilmesi ve genişletilmesi için referans niteliğindedir.
-- İlk çalıştırmada app_config.json otomatik oluşturulur. Eğer oluşmazsa config.example.json dosyasını kopyalayarak kendi ayarlarınıza göre düzenleyebilirsiniz.
-
-
-## İnternet dağıtımı
-
-HTTPS ve yönetici kimlik doğrulaması zorunludur. İnternet erişiminde SQL, dosya yöneticisi, FTP ve geliştirme modülleri kapalıdır. Güncel kurulum için [DEPLOYMENT.md](DEPLOYMENT.md) dosyasını izleyin. .hamu/pub dahil bütün .hamu doğrudan web erişimine kapalı olmalıdır; varlıklar index.php proxy üzerinden sunulur.
+HAMU paneli [MIT Lisansı](LICENSE) ile dağıtılır. Tiny File Manager'ın lisansı [kendi dizininde](.hamu/include/filemanager/LICENSE) korunmuştur.
