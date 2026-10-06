@@ -3,7 +3,7 @@
 if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
- if (isset($_GET['lang']) && in_array($_GET['lang'], ['TR', 'EN'])) {
+ if (isset($_GET['lang']) && in_array($_GET['lang'], ['EN', 'TR'])) {
     $_SESSION['lang'] = $_GET['lang'];
 }
 require_once $_SERVER['DOCUMENT_ROOT'] . '/.hamu/lang.php';		 // Dil Dosyası

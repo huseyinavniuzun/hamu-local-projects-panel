@@ -14,7 +14,7 @@ composer.lock
 *.env
 *.ini
 *.local
-.hamu/config.json
+.hamu/cache/app_config.json
 .hamu/cache/
 .hamu/logs/
 
@@ -28,3 +28,18 @@ node_modules/
 1/
 2/
 3/
+# Yerel proje verileri ve dağıtım sırları
+/.GuitarDatabase/
+/EksiSozluk/
+/GizemUzun/
+/HAMU/
+/MagicCreative/
+/RedBrand/
+/huseyinavniuzun.com/
+/sqlite/
+/test.com/
+.hamu/sqlite/
+.hamu/data/
+*.sqlite
+*.sqlite3
+*.db

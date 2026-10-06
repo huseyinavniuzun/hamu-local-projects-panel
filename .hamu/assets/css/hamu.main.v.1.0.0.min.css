@@ -1,0 +1,1479 @@
+/**
+ * HAMU DevPanel - Main Stylesheet
+ * Location: /.hamu/assets/css/hamu.main.v.1.0.0.min.css
+ * [TR] Projenin ana stil dosyası. Genel yerleşim, tema (koyu/açık mod), gezinme çubuğu, kenar çubuğu, proje kartları, modallar ve diğer tüm arayüz bileşenlerinin stilini tanımlar.
+ * [EN] The main stylesheet for the project. Defines the styles for the general layout, theme (dark/light mode), navigation bar, sidebar, project cards, modals, and all other interface components.
+ */
+
+/* =======================================================
+   1) Fonts - Fontlar
+======================================================= */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+/* =======================================================
+   2) Theme Variables - Tema Değişkenleri
+======================================================= */
+:root[data-bs-theme="dark"] {
+  --background-color: #121212 !important;
+  --background-color-reverse: #f4f4f4 !important;
+  --text-color: #d0d0d0 !important;
+  --text-color-hover: #999 !important;
+  --container-bg: #1e1e1e !important;
+  --navbar-bg: #1e1e1e !important;
+  --navbar-border: #333 !important;
+  --footer-bg: #1e1e1e !important;
+  --footer-border: #333 !important;
+  --button-bg: #333 !important;
+  --button-hover-bg: #999 !important;
+  --input-border: #4e4e4e !important;
+  --folder-bg: #d0d0d0 !important;
+  --folder-hover-bg: #ededed !important;
+  --svg-word-color: #dedede !important;
+  --services-bg: #d0d0d0 !important;
+  --h4-color: #333 !important;
+  --terminal-input-bg: #333 !important;
+  --dropdown-bg: #333 !important;
+  --header-bg: #404040 !important;
+  --body-bg: #595959 !important;
+  --dropdown-border: #333 !important;
+  --dropdown-border-hover: #999 !important;
+  --dropdown-bg-hover: #999 !important;
+  --dropdown-bg-active: #999 !important;
+  --dropdown-bg-active-hover: #999 !important;
+  --list-border: #888 !important;
+  --list-bg: #212529 !important;
+}
+
+:root[data-bs-theme="light"] {
+  --background-color: #f4f4f4 !important;
+  --background-color-reverse: #121212 !important;
+  --text-color: #333 !important;
+  --text-color-hover: #999 !important;
+  --container-bg: #fff !important;
+  --navbar-bg: #dedede !important;
+  --navbar-border: #ccc !important;
+  --footer-bg: #eaeaea !important;
+  --footer-border: #ccc !important;
+  --button-bg: #333 !important;
+  --button-hover-bg: #595959 !important;
+  --input-border: #dee2e6 !important;
+  --folder-bg: #ededed !important;
+  --folder-hover-bg: #d1d1d1 !important;
+  --svg-word-color: #000 !important;
+  --services-bg: #dedede !important;
+  --dropdown-bg: #ededed !important;
+  --header-bg: #dedede !important;
+  --body-bg: #ffffff !important;
+  --dropdown-border: #ccc !important;
+  --dropdown-border-hover: #999 !important;
+  --dropdown-bg-hover: #999 !important;
+  --dropdown-bg-active: #999 !important;
+  --dropdown-bg-active-hover: #999 !important;
+  --h4-color: #333 !important;
+  --terminal-input-bg: #ededed !important;
+  --list-border: #7f7f7f !important;
+  --list-bg: #fff !important;
+}
+
+/* =======================================================
+  3) Theme-specific overrides - Tema-özel geçersiz kılmalar
+======================================================= */
+[data-bs-theme="dark"] .navbar,
+[data-bs-theme="dark"] .sidebar {
+  background-color: var(--navbar-bg) !important;
+  border-bottom: 2px solid var(--navbar-border) !important;
+}
+[data-bs-theme="dark"] .folder {
+  background-color: var(--folder-bg) !important;
+}
+[data-bs-theme="dark"] .folder:hover {
+  background-color: var(--folder-hover-bg) !important;
+}
+[data-bs-theme="dark"] .logo svg {
+  color: var(--svg-word-color) !important;
+}
+[data-bs-theme="dark"] .server-info,
+[data-bs-theme="dark"] .database-info {
+  background-color: var(--services-bg) !important;
+}
+[data-bs-theme="light"] .navbar {
+  background-color: var(--navbar-bg) !important;
+  border-bottom: 2px solid var(--navbar-border) !important;
+}
+
+/* =======================================================
+   4) Base / Global - Genel Ayarlamalar
+======================================================= */
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color) !important;
+  color: var(--text-color);
+  font-family: "Poppins", sans-serif;
+}
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--text-color-hover);
+}
+hr {
+  transition: none !important;
+}
+span {
+  color: var(--text-color) !important;
+  padding-top: 0.5rem;
+}
+
+.tooltip {
+  pointer-events: none;
+}
+.popover .table {
+  margin-bottom: 0;
+  font-size: 0.875rem;
+}
+.popover .table th,
+.popover .table td {
+  white-space: nowrap;
+}
+/* =======================================================
+   5) Utilities & Layout - Yardımcılar & Düzen
+======================================================= */
+body.middle,
+body.top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--background-color);
+  margin: 0;
+  padding: 0;
+}
+body.middle {
+  height: 100vh;
+}
+body.top {
+  height: 50vh;
+}
+.free {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px;
+}
+.logo-buyuk {
+  position: relative !important;
+  top: 3vh;
+  cursor: help;
+}
+
+/* Containers - Konteyner */
+.container-small,
+.container-medium,
+.container-large,
+.cont {
+  background: var(--container-bg);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.container-small {
+  width: 600px;
+}
+.container-medium,
+.cont {
+  width: 900px;
+}
+.container-large {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Module wrappers - Modül  */
+.container-module {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5rem 0 5rem;
+}
+.container-fm {
+  display: flex;
+  max-height: 90%;
+  justify-content: center;
+  align-items: center;
+  padding: 8rem 0 0;
+}
+.content-medium,
+.content-ftp,
+.content-large {
+  background-color: var(--dropdown-bg);
+  color: var(--svg-word-color);
+  border: none;
+  padding: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.content-medium {
+  width: 60vw;
+}
+.content-large {
+  width: 90vw;
+}
+.content-ftp {
+  width: 85vw;
+}
+
+/* =======================================================
+   6) Controls: Buttons / Inputs / Labels - Kontroller: Butonlar / Girişler / Etiketler
+======================================================= */
+button,
+.btn {
+  transition: none !important;
+}
+button.test {
+  border-radius: 5px;
+  background: var(--button-bg);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin-top: 5px;
+  padding: 15px;
+}
+button.test:hover,
+button:hover {
+  background: var(--button-hover-bg);
+}
+input.test,
+button.test,
+textarea.test {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid var(--input-border);
+  border-radius: 5px;
+}
+label.test {
+  font-weight: 500;
+  margin-top: 10px;
+  display: block;
+}
+
+/* =======================================================
+   7) Navbar - Gezinti Çubuğu
+======================================================= */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  padding: 8px;
+}
+.navbar .logo {
+  flex: 0 0 auto;
+}
+.navbar .logo img {
+  height: 40px;
+  margin-left: 10px;
+}
+.navbar .title {
+  flex: 1 1 auto;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 10px;
+}
+.navbar .right-section {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #666;
+}
+.navbar-toggler-icon {
+  height: 1.3em !important;
+}
+
+/* =======================================================
+   8) Dashboard / Sidebar / Main Content - Gösterge Paneli / Kenar Çubuğu / Ana İçerik
+======================================================= */
+.dashboard {
+  display: flex;
+  padding: 15px;
+  gap: 15px;
+  max-width: 80%;
+  margin: auto;
+}
+.sidebar {
+  margin: 60px 0 50px;
+  width: 300px;
+  background: #ededed;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.main-content {
+  margin: 60px 0 50px;
+  max-width: 1200px;
+  flex: 1;
+  padding: 15px;
+  background: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* =======================================================
+   9) Server / DB Info - Sunucu / DB Bilgisi
+======================================================= */
+.server-info,
+.database-info {
+  color: #000;
+  font-size: 14px;
+  margin-top: 20px;
+  padding: 15px;
+  background: var(--services-bg);
+  border-radius: 10px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+}
+.server-info h4,
+.database-info h4 {
+  color: var(--h4-color);
+  font-weight: 500 !important;
+}
+/* kart */
+.server-info.compact {
+  border: 1px solid #e6e6e6;
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+/* başlık */
+.server-info .title {
+  margin: 0 0 8px;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+/* grid: dar alana uygun */
+.server-info .kv {
+  display: grid;
+  grid-template-columns: 120px minmax(0, 1fr); /* etikete sabit, değere esnek alan */
+  gap: 6px 1px;
+  margin: 0;
+}
+/* etiketler */
+.server-info .kv dt {
+  margin: 0;
+  color: #6b7280;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.7rem;
+  line-height: 1.1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* değerler */
+.server-info .kv dd {
+  margin: 0;
+  color: #111827;
+  font-size: 0.84rem;
+  line-height: 1.2;
+}
+/* monospaced kutu (path/host/ip) */
+.server-info .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    "Courier New", monospace;
+  font-size: 0.78rem;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 2px 6px;
+  display: inline; /* satır içinde kalsın */
+  white-space: normal; /* satır sarmaya izin ver */
+  word-break: break-word; /* kelime sonlarında kır */
+  overflow-wrap: anywhere; /* aşırı uzun parçalarda son çare */
+}
+/* küçük rozet */
+.server-info .kap {
+  display: inline-flex;
+  align-items: center;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.76rem;
+  line-height: 1;
+}
+.server-info .muted {
+  color: #6b7280;
+}
+
+/* =======================================================
+   10) Service List - Hizmet Listesi
+======================================================= */
+.service-list a {
+  display: block;
+  padding: 10px;
+  color: #5c5c5c;
+  text-decoration: none;
+  font-size: 14px;
+  border-bottom: 1px solid var(--list-border);
+}
+.service-list a:hover {
+  color: var(--text-color-hover);
+}
+
+/* =======================================================
+   11) Folder Cards (with Action Bar) - Klasör Kartları (Küçük Menü ile)
+======================================================= */
+.folder {
+  position: relative;
+  overflow: hidden; /* konumlandırma: action bar */
+  color: var(--h4-color);
+  cursor: pointer;
+  background: var(--folder-bg);
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 10px;
+}
+.folder:hover {
+  background: var(--folder-hover-bg);
+  transform: translateY(-3px);
+}
+.folder img,
+.folder i {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  font-size: 3rem;
+}
+.folder-word {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Küçük menü (action bar) */
+.folder-actions {
+  position: absolute;
+  top: 17%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  gap: 6px;
+  padding: 4px 8px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: saturate(160%) blur(3px);
+  z-index: 5;
+  pointer-events: none;
+}
+.folder-actions .btn-icon {
+  pointer-events: auto;
+  width: 24px;
+  height: 24px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.folder-actions .btn-icon i {
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
+  transform: translate(0, 35%);
+}
+.folder-actions .btn-icon:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Mobil toggle cog */
+.mobile-cog {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 6;
+  width: 26px;
+  height: 26px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.32);
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+}
+.mobile-cog i {
+  font-size: 14px;
+  line-height: 1;
+  transform: translate(0, 35%);
+}
+.mobile-cog:hover {
+  background: rgba(0, 0, 0, 0.42);
+}
+
+/* =======================================================
+   12) DB List - Veritabanı Listesi
+======================================================= */
+#databaseList .db-name {
+  list-style: none;
+  cursor: pointer;
+  padding: 5px 0;
+}
+
+/* aktif satır */
+#databaseList .db-name.active,
+#databaseList .db-name.active-db,
+#databaseList .db-name[data-active="1"] {
+  color: #08660c;
+  font-weight: 700;
+  border-radius: 6px;
+}
+
+/* ikon/metin birlikte renk alsın */
+#databaseList .db-name.active i,
+#databaseList .db-name.active-db i,
+#databaseList .db-name[data-active="1"] i {
+  color: inherit;
+}
+
+ul#databaseList {
+  padding-left: 0.7rem !important;
+}
+
+/* =======================================================
+   13) Footer / Terminal -  Altbilgi / Terminal
+======================================================= */
+.footer {
+  text-align: center;
+  padding: 10px;
+  background: var(--footer-bg);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 900;
+  border-top: 2px solid var(--footer-border);
+}
+.footer input#sqlQuery {
+  background-color: var(--terminal-input-bg);
+  color: var(--text-color);
+  border-style: solid solid double solid;
+  border-width: 1px 0 1px 0;
+  border-color: var(--input-border);
+  font-family: monospace;
+  box-shadow: none;
+  text-transform: none;
+}
+.terminalnodb::placeholder {
+  color: var(--text-color);
+}
+
+/* =======================================================
+   14) SQL Messages - SQL Mesajları
+======================================================= */
+.sql-message {
+  color: #ededed !important;
+  margin: 5px 0;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+.sql-message.info {
+  background-color: #00471c;
+}
+.sql-message.success {
+  background-color: #217000;
+}
+.sql-message.warning {
+  background-color: #a86a0e;
+}
+.sql-message.error {
+  background-color: #b02727;
+}
+
+/* =======================================================
+   15) Tooltips - Araç İpuçları
+======================================================= */
+.tooltip-inner {
+  max-width: 800px !important;
+  white-space: normal !important;
+  text-align: left !important;
+  word-wrap: break-word !important;
+  overflow-y: auto;
+}
+.tooltip-s .tooltip-inner {
+  max-width: 180px;
+  padding: 4px 6px;
+  font-size: 0.75rem;
+  line-height: 1.2;
+}
+
+/* =======================================================
+   16) File Manager - Dosya Yöneticisi
+======================================================= */
+.file-manager {
+  padding: 1rem !important;
+  color: var(--text-color);
+  background: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 90vw !important;
+  height: 90vh !important;
+}
+.FM-iframe {
+  padding-top: 10px;
+  width: 100%;
+  height: 85%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0 !important;
+}
+iframe {
+  border: 0;
+  width: 100%;
+  height: 85%;
+}
+
+/* =======================================================
+   17) Fixed homepage links - Sabit anasayfa linkleri
+======================================================= */
+.sabit-link,
+.homepage-link-2 {
+  position: fixed !important;
+  font-size: 18px !important;
+  top: 0 !important;
+  padding: 15px !important;
+  background-color: var(--navbar-bg) !important;
+  color: var(--text-color) !important;
+  text-decoration: none !important;
+  z-index: 9999 !important;
+}
+.sabit-link:hover,
+.homepage-link-2:hover {
+  background-color: #999999 !important;
+  text-decoration: none !important;
+}
+.sabit-link {
+  right: 0 !important;
+}
+.homepage-link-2 {
+  right: -200px !important;
+}
+
+/* =======================================================
+   18) Helpers - Yardımcılar
+======================================================= */
+.hideS {
+  display: none !important;
+}
+.simple-color {
+  background-color: var(--container-bg) !important;
+  color: var(--svg-word-color) !important;
+}
+
+/* =======================================================
+   19) Modals & Forms - Modallar & Formlar
+======================================================= */
+.hidden {
+  display: none;
+}
+.modal-lg#jsonSet {
+  max-width: 35%;
+}
+
+.modal-content {
+  font-size: 14px;
+  background-color: var(--container-bg);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+.modal-body {
+  background-color: var(--body-bg);
+  padding: 10px;
+  font-size: 14px;
+  overflow: auto;
+  max-height: 60vh;
+}
+.modal-body #settingsForm {
+  padding-left: 4em !important;
+  width: 90%;
+}
+.modal-body input {
+  font-size: 1em !important;
+}
+.modal-header {
+  background-color: var(--header-bg);
+  border-bottom: 2px solid #2d2c2c;
+  box-shadow: 0 0 15px rgba(115, 114, 114, 0.1);
+  padding: 1rem;
+}
+.btn-close {
+  margin: -0.5rem -0.5rem -0.5rem auto;
+}
+.row.mb-3 {
+  margin-bottom: 1rem;
+}
+.form-label,
+.form-check-label {
+  font-weight: 500;
+}
+.form-check-label {
+  margin-left: 0.25rem;
+}
+input[type="text"]:focus,
+select.form-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.25rem rgba(54, 54, 54, 0.25);
+}
+
+/* Checkboxes */
+.form-check-input[type="checkbox"] {
+  background-color: rgb(205, 205, 205) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0,0,0,0.25)'/%3e%3c/svg%3e") !important;
+  --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0,0,0,0.25)'/%3e%3c/svg%3e") !important;
+}
+.form-check-input[type="checkbox"]:focus {
+  background-color: rgb(205, 205, 205) !important;
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  box-shadow: none !important;
+}
+.form-check-input[type="checkbox"]:checked {
+  background-color: rgb(205, 205, 205) !important;
+  border-color: rgba(244, 240, 240, 0.1) !important;
+  box-shadow: none !important;
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0,0,0,0.9)'/%3e%3c/svg%3e") !important;
+  --bs-form-check-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba(0,0,0,0.9)'/%3e%3c/svg%3e") !important;
+}
+
+/* =======================================================
+   20) Dark/Language & Other Small Controls - Karanlık/Dil & Diğer Küçük Kontroller
+======================================================= */
+.btn#langDropdown,
+.btn#folderDropdownButton,
+.btn#showTypeDropdownButton,
+.btn#uploadProjectButton,
+.dark-mode-select,
+.dark-mode-icon,
+.lang-icon,
+#mobile-dark-select {
+  border: none !important;
+  background-color: var(--dropdown-bg) !important;
+  color: var(--svg-word-color) !important;
+  height: 30px !important;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 8px !important;
+  transition: none !important;
+  font-size: 13px !important;
+}
+.dark-mode-select {
+  border-radius: 0 5px 5px 0;
+  padding-top: 4px !important;
+}
+.dark-mode-icon {
+  width: 30px;
+  justify-content: right;
+  padding: 0 8px 0 0;
+  border-radius: 5px 0 0 5px;
+}
+.lang-icon {
+  justify-content: center;
+  padding: 0 10px 0 0;
+  border-radius: 0 5px 5px 0;
+}
+.dark-lang-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  margin: 4px;
+}
+#mobile-dark-select {
+  justify-content: center;
+  width: 40px;
+  border-radius: 0 5px 5px 0;
+}
+.badge {
+  background-color: var(--body-bg);
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+/* =======================================================
+   21) Pre / Card header / Code element - Pre / Kart başlığı / Kod öğesi
+======================================================= */
+pre {
+  background: var(--navbar-bg);
+  padding: 1em;
+  border-radius: 5px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+.card-header {
+  background-color: var(--header-bg);
+  color: var(--text-color);
+}
+code {
+  font-family: Consolas, "courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 105%;
+}
+
+/* =======================================================
+   22) Login page - Giriş sayfası
+======================================================= */
+body.login {
+  background-color: var(--background-color) !important;
+}
+body.login.blurred-bg::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(20px) brightness(0.4);
+  -webkit-backdrop-filter: blur(20px) brightness(0.4);
+  z-index: -1;
+}
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--footer-bg);
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+.login-container h2 {
+  margin-bottom: 20px;
+}
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: none;
+  text-align: center;
+}
+.login-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--button-bg);
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+.login-container button:hover {
+  background-color: var(--button-hover-bg);
+}
+.login-container a {
+  display: block;
+  margin-top: 10px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 14px;
+}
+.login-container a:hover {
+  color: var(--text-color-hover);
+}
+
+/* =======================================================
+   23) Lists / Items
+======================================================= */
+.list-limit {
+  max-height: 50vh !important;
+  overflow-x: auto;
+}
+.list-group-item.active {
+  background-color: #2f9d50;
+  border: #333;
+  border-right: 1px solid var(--list-border);
+  border-left: 1px solid var(--list-border);
+  box-shadow: inset 5px 0 5px -5px rgba(45, 75, 45, 0.5),
+    inset -5px 0 5px -5px rgba(45, 75, 45, 0.5);
+}
+.list-group-item.active:hover {
+  background-color: #3eab5f;
+  border-right: 1px solid var(--list-border);
+  border-left: 1px solid var(--list-border);
+}
+.list-group-item:hover {
+  background-color: #ada9a9;
+}
+
+/* =======================================================
+   24) Autocomplete (jQuery UI / Terminal Palette) - Otomatik Tamamlama (jQuery UI / Terminal Paleti)
+======================================================= */
+/* Yapı/konumlandırma */
+ul.ui-autocomplete {
+  list-style: none !important;
+  padding-left: 5px;
+  margin: 0;
+}
+.ui-autocomplete {
+  position: absolute !important;
+  inset: auto -50 90px 0 !important; /* terminal input üstünde daha yukarıda görünsün */
+  margin: 0 auto !important;
+  width: min(25rem, 50vw) !important;
+  max-height: 30vh !important;
+  overflow: auto !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--dropdown-border) !important;
+  backdrop-filter: saturate(140%) blur(6px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.22), 0 2px 8px rgba(0, 0, 0, 0.12) !important;
+  padding: 6px !important;
+  z-index: 2000 !important; /* navbar/footerdan yukarıda */
+}
+
+/* Tema renkleri */
+html[data-bs-theme="light"] .ui-autocomplete {
+  background-color: var(--container-bg) !important;
+  color: var(--text-color) !important;
+  border: 1px solid var(--input-border) !important;
+}
+html[data-bs-theme="dark"] .ui-autocomplete {
+  background-color: rgba(33, 33, 33, 0.92) !important;
+  color: #eee !important;
+  border: 1px solid #575349 !important;
+}
+
+/* Satır */
+.ui-autocomplete .ui-menu-item {
+  margin: 0 !important;
+}
+.ui-autocomplete .ui-menu-item-wrapper {
+  display: grid !important;
+  grid-template-columns: 1fr auto; /* solda içerik, sağda kısayt/kategori */
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 0.7rem !important;
+  line-height: 1.25;
+  border-radius: 8px !important;
+  border: 1px solid transparent !important;
+  cursor: pointer;
+}
+
+/* Hover/Seçili */
+.ui-autocomplete .ui-menu-item-wrapper:hover,
+.ui-autocomplete .ui-menu-item-wrapper.ui-state-active {
+  background: var(--dropdown-bg-hover) !important;
+  color: var(--h4-color) !important;
+  border-color: var(--dropdown-border-hover) !important;
+}
+html[data-bs-theme="dark"] .ui-autocomplete .ui-menu-item-wrapper:hover,
+html[data-bs-theme="dark"]
+  .ui-autocomplete
+  .ui-menu-item-wrapper.ui-state-active {
+  background: rgba(255, 255, 255, 0.06) !important;
+  color: #fff !important;
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+/* Komut adı + açıklama (soldaki içerik) */
+.ui-autocomplete .cmd {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  min-width: 0;
+}
+.ui-autocomplete .cmd .title {
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ui-autocomplete .cmd .desc {
+  opacity: 0.7;
+  font-size: 0.85em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Sağ taraftaki ipucu/kategori etiketleri */
+.ui-autocomplete .hint {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: center;
+}
+.ui-autocomplete .kbd {
+  font: 500 11px/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  padding: 2px 6px;
+  border-radius: 6px;
+  border: 1px solid var(--dropdown-border);
+  background: var(--body-bg);
+  opacity: 0.9;
+}
+
+/* Grup başlığı */
+.ui-autocomplete .group {
+  margin: 6px 6px 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.7;
+  border-left: 3px solid var(--dropdown-border);
+}
+
+/* Eşleşen kısım vurgusu */
+.ui-autocomplete .match {
+  position: relative;
+  font-weight: 700;
+  text-decoration: none;
+}
+html[data-bs-theme="light"] .ui-autocomplete .match {
+  background: linear-gradient(
+    to top,
+    rgba(255, 230, 160, 0.9) 35%,
+    transparent 0
+  );
+}
+html[data-bs-theme="dark"] .ui-autocomplete .match {
+  background: linear-gradient(
+    to top,
+    rgba(130, 160, 255, 0.28) 35%,
+    transparent 0
+  );
+}
+
+/* Boş sonuç */
+.ui-autocomplete .empty {
+  padding: 0.75rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* İnce scrollbar */
+.ui-autocomplete::-webkit-scrollbar {
+  width: 10px;
+}
+.ui-autocomplete::-webkit-scrollbar-thumb {
+  background: var(--dropdown-border);
+  border-radius: 10px;
+}
+
+/* =======================================================
+   25) Responsive - Duyarlılık
+======================================================= */
+@media (max-width: 992px) {
+  .tooltip {
+    display: none !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+  }
+  .dashboard {
+    padding-top: 80px;
+    padding-bottom: 70px;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+  .main-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto;
+  }
+
+  /* Folder action bar mobil davranışları */
+  .mobile-cog {
+    display: inline-flex;
+  }
+  .folder-actions {
+    display: flex;
+    background: transparent !important;
+    backdrop-filter: none !important;
+    pointer-events: none;
+  }
+  .folder-actions .btn-icon {
+    display: none !important;
+  }
+  .folder.actions-open .folder-actions {
+    background: rgba(0, 0, 0, 0.28) !important;
+    backdrop-filter: saturate(160%) blur(3px) !important;
+    pointer-events: auto;
+  }
+  .folder.actions-open .folder-actions .btn-icon {
+    display: inline-flex !important;
+  }
+}
+/* 2FA responsive iyileştirmeleri */
+@media (max-width:768px){
+  .hamu-2fa .row{display:block;}
+  .hamu-2fa .col,.hamu-2fa .col-6,.hamu-2fa .col-md-6{width:100%;max-width:100%;}
+  .hamu-2fa .verify-row{display:flex;flex-direction:column;gap:.5rem;}
+  .hamu-2fa canvas#qrCanvas{max-width:100%;height:auto;} }
+
+@media (max-width: 420px) {
+  .server-info .kv {
+    grid-template-columns: 1fr;
+  }
+  .server-info .kv dt {
+    margin-top: 4px;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  .server-info.compact {
+    background: #0f1117;
+    border-color: #1f2937;
+  }
+  .server-info .kv dd {
+    color: #e5e7eb;
+  }
+  .server-info .mono {
+    background: #0b1220;
+    border-color: #1f2937;
+    color: #e5e7eb;
+  }
+  .server-info .chip {
+    background: #0b1220;
+    border-color: #1f2937;
+    color: #cbd5e1;
+  }
+  .server-info .kv dt {
+    color: #93a3b8;
+  }
+}
+
+@media (min-width: 993px) {
+  .folder {
+    overflow: visible;
+  }
+  .mobile-cog {
+    display: none !important;
+  }
+  .folder:hover .folder-actions {
+    display: flex;
+  }
+  .folder:hover .folder-actions .btn-icon {
+    display: inline-flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .content-medium,
+  .content-large,
+  .file-manager {
+    width: 100% !important;
+    height: auto !important;
+    padding: 1rem !important;
+  }
+  .table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .navbar .title {
+    font-size: 14px;
+    padding: 0 5px;
+  }
+  .list-limit {
+    max-height: 30vh !important;
+  }
+  .modal-lg,
+  .modal-dialog {
+    max-width: 95% !important;
+    margin: 1rem auto;
+  }
+  .btn,
+  .form-control {
+    font-size: 14px !important;
+    padding: 6px 10px !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .input-group.input-group-sm {
+    max-width: 180px !important;
+  }
+}
+
+/* =======================================================
+   26) Misc Messages - Çeşitli Mesajlar
+======================================================= */
+.msg {
+  margin: 10px 0;
+  padding: 10px 15px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+.msg-success {
+  background-color: #d4edda;
+  color: #155724;
+}
+.msg-error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+.msg-info {
+  background-color: #cce5ff;
+  color: #004085;
+}
+.msg-warning {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* =======================================================
+   27) Page-specific (FM switchbar) - Sayfa-özel (FM switchbar)
+======================================================= */
+.fm-switchbar {
+  background: var(--simple-color);
+  color: var(--text-color);
+  border: 1px solid var(--dropdown-border);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.85rem;
+  flex-wrap: wrap; /* mobilde sarma */
+}
+.fm-switchbar .fm-label {
+  font-size: 0.78rem;
+  line-height: 1;
+  user-select: none;
+  opacity: 0.9;
+  color: var(--text-color);
+}
+@media (max-width: 575.98px) {
+  .fm-switchbar {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+#folderDropdownButton.btn {
+  border: 1px solid var(--dropdown-border) !important;
+  background-color: var(--dropdown-bg) !important;
+  color: var(--text-color) !important;
+  height: 32px !important;
+  padding: 0 0.75rem !important;
+  font-size: 13px !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* ==========================================================================
+   28) FTP / Local / Project – Gelişmiş Profesyonel Görünüm
+   - Renkler: Mevcut tema değişkenlerini kullanır.
+   - Animasyonlar: Yumuşak geçişler ve hover efektleri.
+   - Düzen: Daha rafine boşluklar ve gölgeler.
+   ========================================================================== */
+
+/* Genel Konteyner ve Kartlar */
+.container-module .content-ftp,
+.container-module .content-large {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container-module .content-ftp .card,
+.container-module .content-large .card {
+  border: 1px solid var(--dropdown-border);
+  background: var(--container-bg);
+  border-radius: 14px; /* Daha yuvarlak köşeler */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.container-module .content-ftp .card:hover,
+.container-module .content-large .card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+}
+
+.container-module .content-ftp .card-header,
+.container-module .content-large .card-header {
+  background: var(--header-bg);
+  color: var(--text-color);
+  border-bottom: 1px solid var(--dropdown-border);
+  padding: 0.8rem 1.2rem;
+  font-weight: 600;
+  border-radius: 13px 13px 0 0; /* Kart ile uyumlu */
+}
+
+/* Yapışkan Araç Çubuğu */
+.container-module .content-ftp .toolbar.sticky-top,
+.container-module .content-large .toolbar.sticky-top {
+  background: rgba(
+    var(--bs-body-bg-rgb),
+    0.85
+  ) !important; /* Hafif transparan */
+  backdrop-filter: saturate(150%) blur(8px);
+  border: 1px solid var(--dropdown-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  z-index: 10;
+}
+
+/* Dizin Yolu Göstergesi */
+.content-ftp .fw-semibold span:last-child,
+.content-large .fw-semibold span:last-child {
+  display: inline-block;
+  padding: 0.3rem 0.65rem;
+  margin-left: 0.35rem;
+  border: 1px solid var(--dropdown-border);
+  border-radius: 8px;
+  background: var(--body-bg);
+  color: var(--text-color);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+/* Form Elemanları */
+.content-ftp .form-control,
+.content-ftp .form-select,
+.content-large .form-control,
+.content-large .form-select {
+  border-color: var(--input-border);
+  color: var(--text-color);
+  background: var(--body-bg);
+  border-radius: 10px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.content-ftp .form-control:focus,
+.content-ftp .form-select:focus,
+.content-large .form-control:focus,
+.content-large .form-select:focus {
+  border-color: var(--button-bg);
+  box-shadow: 0 0 0 3px rgba(var(--bs-primary-rgb), 0.15);
+}
+
+/* Butonlar */
+.content-ftp .btn,
+.content-large .btn {
+  transition: all 0.2s ease-out;
+}
+.content-ftp .btn-secondary,
+.content-large .btn-secondary {
+  border: 1px solid var(--dropdown-border);
+  background: var(--dropdown-bg);
+  color: var(--text-color);
+}
+.content-ftp .btn-secondary:hover,
+.content-large .btn-secondary:hover {
+  filter: brightness(0.95);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Tablolar */
+.content-ftp .table-responsive,
+.content-large .table-responsive {
+  max-height: 65vh; /* Biraz daha fazla alan */
+  overflow: auto;
+  border: 1px solid var(--dropdown-border);
+  border-radius: 14px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+.content-ftp .table,
+.content-large .table {
+  margin-bottom: 0;
+  border-color: var(--dropdown-border);
+  color: var(--text-color);
+}
+.content-ftp .table thead,
+.content-large .table thead {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--header-bg);
+  border-bottom: 2px solid var(--dropdown-border); /* Daha belirgin başlık */
+}
+.content-ftp .table thead th,
+.content-large .table thead th {
+  font-weight: 600;
+  white-space: nowrap;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+}
+.content-ftp .table-hover > tbody > tr,
+.content-large .table-hover > tbody > tr {
+  transition: background-color 0.15s ease-in-out;
+}
+.content-ftp .table-hover > tbody > tr:hover,
+.content-large .table-hover > tbody > tr:hover {
+  background: var(--dropdown-bg-active);
+}
+
+/* Dosya Boyutu Rozeti */
+.content-ftp table td:nth-child(2) .text-muted,
+.content-large table td:nth-child(2) .text-muted {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  border: 1px solid var(--dropdown-border);
+  border-radius: 999px;
+  background: var(--body-bg);
+  font-weight: 600;
+  color: var(--text-color) !important;
+  font-size: 0.8em;
+}
+
+/* Aksiyon Butonları */
+.content-ftp table td:last-child .btn,
+.content-large table td:last-child .btn {
+  opacity: 0.85;
+}
+.content-ftp table td:last-child .btn:hover,
+.content-large table td:last-child .btn:hover {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* İkon Renkleri */
+.content-ftp .fa-folder,
+.content-large .fa-folder {
+  color: #f0ad4e; /* Bootstrap warning rengi */
+}
+.content-ftp .fa-file,
+.content-large .fa-file {
+  color: #818c99;
+}
+[data-bs-theme="dark"] .content-ftp .fa-file,
+[data-bs-theme="dark"] .content-large .fa-file {
+  color: #a0b1c4;
+}
+
